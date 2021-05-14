@@ -40,9 +40,10 @@
 .game_box-field-cell_mini, .game_box-field-cell_medium, .game_box-field-cell_large, .game_box-field-cell_extralarge {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  background-color: #d1fb13;
-  -webkit-transition: background-color 500ms ease-out;
-  transition: background-color 500ms ease-out;
+  background-color: transparent;
+  border-radius: 50%;
+  -webkit-transition: background-color 300ms ease-out, border-radius 300ms ease-out;
+  transition: background-color 300ms ease-out, border-radius 300ms ease-out;
 }
 
 * {
@@ -140,7 +141,7 @@
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  padding: 64px 0 16px;
+  padding: 32px 0 16px;
 }
 
 .game_box-field {
@@ -148,6 +149,9 @@
           box-sizing: border-box;
   display: block;
   border-collapse: collapse;
+}
+
+.game_box-field-border {
   border: 1px solid #82c20c;
 }
 
@@ -169,6 +173,11 @@
 .game_box-field-cell_extralarge {
   height: 40px;
   width: 40px;
+}
+
+.game_box-field-cell-loaded {
+  background-color: #d1fb13;
+  border-radius: 0%;
 }
 
 .hide {

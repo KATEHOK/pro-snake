@@ -1,15 +1,19 @@
 'use strict';
-const API_SETTINGS = "http://pro-snake/json/settings.json";
+// const API_SETTINGS = "http://pro-snake/json/settings.json";
+// const API_SETTINGS = "https://github.com/KATEHOK/pro-snake/blob/main/json/settings.json";
+// settings = fetch(API_SETTINGS, "no-cors")
+//     .then(result => result.json())
+//     .catch(() => console.error('Lost settings! Set demo settings!'))
 let settings = {
     snakeLen: 3,
     cellSize: "_extralarge",
+    slowLoading: true,
     fieldSize: {
-        rows: 10,
-        cols: 10
+        rows: 25,
+        cols: 25
     }
 };
-settings = fetch(API_SETTINGS, "no-cors")
-    .then(result => result.json())
-    .catch(() => console.error('Lost settings! Set demo settings!'))
-
-setTimeout(() => console.dir(settings), 1000);
+const fieldGenBtn = document.querySelector('#field_gen_btn');
+fieldGenBtn.addEventListener('click', () => {
+    const field = new Field(settings, '#game_box');
+});

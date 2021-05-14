@@ -8,6 +8,7 @@
     <title>ProSnake</title>
     <link rel="stylesheet" href="style/base.css">
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <script defer src="js/btn.js"></script>
     <script defer src="js/field.js"></script>
     <script defer src="js/main.js"></script>
 </head>
@@ -22,75 +23,13 @@
                 <h1 class="name_box-site_name">ProSnake</h1>
             </div>
             <div class="btn_box">
-                <button class="btn_box-btn">Settings</button>
-                <button class="btn_box-btn">Statistics</button>
+                <button class="btn_box-btn" id="setting_btn">Settings</button>
+                <button class="btn_box-btn" id="statistics_btn">Statistics</button>
                 <button class="btn_box-btn" id="signin_btn">Sign In</button>
             </div>
         </header>
-        <div class="game_box">
-            <button class="game_box-gen_field_btn hide">Generate</button>
-            <table class="game_box-field">
-                <tr>
-                    <td data-x="0" data-y="0" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="1" data-y="0" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="2" data-y="0" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="3" data-y="0" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="4" data-y="0" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="5" data-y="0" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="6" data-y="0" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="7" data-y="0" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="8" data-y="0" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="9" data-y="0" class="game_box-field-cell_extralarge"></td>
-                </tr>
-                <tr>
-                    <td data-x="0" data-y="1" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="1" data-y="1" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="2" data-y="1" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="3" data-y="1" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="4" data-y="1" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="5" data-y="1" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="6" data-y="1" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="7" data-y="1" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="8" data-y="1" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="9" data-y="1" class="game_box-field-cell_extralarge"></td>
-                </tr>
-                <tr>
-                    <td data-x="0" data-y="2" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="1" data-y="2" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="2" data-y="2" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="3" data-y="2" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="4" data-y="2" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="5" data-y="2" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="6" data-y="2" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="7" data-y="2" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="8" data-y="2" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="9" data-y="2" class="game_box-field-cell_extralarge"></td>
-                </tr>
-                <tr>
-                    <td data-x="0" data-y="3" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="1" data-y="3" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="2" data-y="3" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="3" data-y="3" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="4" data-y="3" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="5" data-y="3" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="6" data-y="3" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="7" data-y="3" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="8" data-y="3" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="9" data-y="3" class="game_box-field-cell_extralarge"></td>
-                </tr>
-                <tr>
-                    <td data-x="0" data-y="4" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="1" data-y="4" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="2" data-y="4" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="3" data-y="4" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="4" data-y="4" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="5" data-y="4" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="6" data-y="4" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="7" data-y="4" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="8" data-y="4" class="game_box-field-cell_extralarge"></td>
-                    <td data-x="9" data-y="4" class="game_box-field-cell_extralarge"></td>
-                </tr>
-            </table>
+        <div class="game_box" id="game_box">
+            <button class="game_box-gen_field_btn" id="field_gen_btn">Generate</button>
         </div>
     </main>
 </body>
