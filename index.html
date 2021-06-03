@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style/base.css">
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
     <script defer src="js/btn.js"></script>
+    <script defer src="js/game.js"></script>
     <script defer src="js/field.js"></script>
     <script defer src="js/main.js"></script>
 </head>
@@ -29,7 +30,11 @@
             </div>
         </header>
         <div class="game_box" id="game_box">
-            <button class="game_box-gen_field_btn" id="field_gen_btn">Generate</button>
+            <div class="game_box-field_btns">
+                <button class="game_box-field_btns-item hide" id="field_restart_btn">Restart</button>
+                <button class="game_box-field_btns-item" id="field_gen_btn">Generate</button>
+                <button class="game_box-field_btns-item hide" id="field_start_go_stop_btn">Start</button>
+            </div>
         </div>
     </main>
 </body>

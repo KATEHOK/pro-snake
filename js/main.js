@@ -9,11 +9,11 @@ let settings = {
     cellSize: "_extralarge",
     slowLoading: true,
     fieldSize: {
-        rows: 25,
-        cols: 25
+        rows: 20,
+        cols: 20
     }
 };
 const fieldGenBtn = document.querySelector('#field_gen_btn');
 fieldGenBtn.addEventListener('click', () => {
-    const field = new Field(settings, '#game_box');
+    const field = new Field(settings, 'game_box');
 });
