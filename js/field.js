@@ -54,14 +54,14 @@ class Field {
         if (this.slowLoading) {
             let limit = this.fieldSize.cols * this.fieldSize.rows;
             let speed = 1;
-            limit < 200 ? speed = 10 : null;
-            limit < 100 ? speed = 50 : null;
+            limit <= 200 ? speed = 10 : null;
+            limit <= 100 ? speed = 50 : null;
             let counter = 0;
             console.dir(cells);
             let maxI = 1;
-            if (maxI > 400) {
+            if (limit >= 400) {
                 limit % 10 == 0 ? maxI = 5 : null;
-            } else if (maxI > 900) {
+            } else if (maxI >= 900) {
                 limit % 10 == 0 ? maxI = 5 : null;
                 limit % 20 == 0 ? maxI = 10 : null;
             }
