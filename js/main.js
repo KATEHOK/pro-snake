@@ -4,6 +4,7 @@
 // settings = fetch(API_SETTINGS, "no-cors")
 //     .then(result => result.json())
 //     .catch(() => console.error('Lost settings! Set demo settings!'))
+window.addEventListener('keydown', e => console.dir(e.code));
 let settings = {
     snakeLen: 3,
     cellSize: "_extralarge",
