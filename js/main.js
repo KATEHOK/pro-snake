@@ -7,6 +7,7 @@
 window.addEventListener('keydown', e => console.dir(e.code));
 let settings = {
     snakeLen: 3,
+    snakeSpeed: 1,
     cellSize: "_extralarge",
     slowLoading: true,
     fieldSize: {

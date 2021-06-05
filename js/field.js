@@ -9,6 +9,7 @@ class Field {
         this.wrapperId = wrapperId;
         this.fieldSize = settings.fieldSize;
         this.snakeLen = settings.snakeLen;
+        this.snakeSpeed = settings.snakeSpeed;
         this.cellSize = settings.cellSize;
         this.slowLoading = settings.slowLoading;
         this.genField();
@@ -16,6 +17,9 @@ class Field {
         this.showField();
         this.setListener();
         console.dir(this);
+    }
+    restart() {
+        // удалить объект игры и запустить start
     }
     toggleNameBtn(text) {
         document.getElementById(this.startGoStopId).textContent = text;
