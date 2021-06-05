@@ -194,6 +194,7 @@
 }
 
 .game_box-counter {
+  font-weight: 600;
   margin: 5px auto 0;
   font-size: 26px;
   display: block;
@@ -201,6 +202,10 @@
 
 .hide {
   display: none;
+}
+
+.apple {
+  background-color: red;
 }
 
 .snake {

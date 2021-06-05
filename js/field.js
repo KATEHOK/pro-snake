@@ -36,9 +36,12 @@ class Field {
         // restartBtn.addEventListener('click', this.restart);
     }
     toggleBtns() {
-        document.querySelector(`#${this.genFieldId}`).classList.toggle('hide');
-        document.querySelector(`#${this.startGoStopId}`).classList.toggle('hide');
-        document.querySelector(`#${this.restartId}`).classList.toggle('hide');
+        this.toggle(this.genFieldId);
+        this.toggle(this.startGoStopId);
+        this.toggle(this.restartId);
+    }
+    toggle(idName, className = 'hide') {
+        document.querySelector(`#${idName}`).classList.toggle(className);
     }
     genField() {
         let template = '<table class="game_box-field">'

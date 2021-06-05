@@ -12,8 +12,11 @@ class Game {
         this.possibleKeys = ['NumpadEnter', 'Enter', 'Space'];
         this.isPlaying = false;
         this.crashed = false;
+        this.score = 0;
         this.makeSnake();
         this.genSnake();
+        this.setApple()
+        this.printCell(this.getCell(this.apple), 'apple');
         this.setListener();
         console.dir(this);
     }
@@ -22,7 +25,7 @@ class Game {
      */
     toggleTextBtn() {
         let btn = document.getElementById(this.field.startGoStopId);
-        this.isPlaying ? btn.textContent = 'Go' : btn.textContent = 'Stop';
+        this.isPlaying ? btn.textContent = 'Stop' : btn.textContent = 'Go';
     }
     /**
      * ставит игру на паузу || запускает игру
@@ -40,19 +43,110 @@ class Game {
     }
     crash() {
         // остановить без возможности возобновления
+        this.stop();
+        this.field.toggle(this.field.startGoStopId);
         this.crashed = true;
+        this.score = 0;
     }
+    /**
+     * устанавливает случайную позицию для яблока
+     */
+    setApple() {
+        let checker = true;
+        let coords;
+        while (checker) {
+            coords = [];
+            coords.push(Math.round(Math.random() * (this.field.fieldSize.cols - 1)));
+            coords.push(Math.round(Math.random() * (this.field.fieldSize.rows - 1)));
+            if (!this.body.includes(coords) && JSON.stringify(this.apple) != JSON.stringify(coords)) {
+                checker = false;
+            }
+        }
+        this.apple = coords;
+    }
+    /**
+     * определяет координаты следующей ячейки
+     * @returns координаты следующей ячейки
+     */
+    getNextItem() {
+        let newItem = [...this.body[this.body.length - 1]];
+        switch (this.dir) {
+            case 'Up':
+                newItem[1]--;
+                break;
+            case 'Down':
+                newItem[1]++;
+                break;
+            case 'Right':
+                newItem[0]++;
+                break;
+            case 'Left':
+                newItem[0]--;
+                break;
+        }
+        return newItem;
+    }
+    /**
+     * проверяет, является ли ячейка доступной для хода в нее
+     * (не выходит за пределы поля && не врезается змейка сама в себя)
+     * @param {Array} item координаты ячейки
+     * @returns 
+     */
+    isCellCorrect(item) {
+        return item[0] >= 0 && item[1] >= 0 && item[0] < this.field.fieldSize.cols &&
+            item[1] < this.field.fieldSize.rows && !this.body.includes(item);
+    }
+    /**
+     * обновляет счётчик на странице
+     */
+    updateScore() {
+        document.getElementById(this.field.fieldCounterId).textContent = `Score: ${this.score}`;
+    }
+    /**
+     * усанавливает сет-интервал - шаг игры
+     */
     setCycle() {
         this.gameKey = setInterval(() => {
             // игра сломана || остановлена? - стоп, return
+            if (this.crashed || !this.isPlaying) {
+                this.removeCycle();
+                return;
+            }
             // получить координаты следующей клетки
-            // координаты неверны (врезались в хвост || в бортик) - удалить сет-интервал, сломать игру, return
-            // this.alreadyChanged = false
+            let newCoords = this.getNextItem();
+            // координаты неверны (врезались в хвост || в бортик) - сломать игру, return
+            if (!this.isCellCorrect(newCoords)) {
+                this.crash();
+                return;
+            }
+            this.alreadyChanged = false
+            this.body.push(newCoords);
             // получить объект ячейки
+            let cellEl = this.getCell(newCoords);
             // закрасить новую ячейку
+            this.printCell(cellEl);
             // в новой ячейке было яблоко (сделать this.wasApple - или типа того) - return
+            console.log(this.apple, newCoords);
+            // чтобы сравнить массивы можно преобразовать их в JSON строки
+            if (JSON.stringify(this.apple) == JSON.stringify(newCoords)) {
+                this.score++;
+                this.speed++;
+                this.updateScore();
+                this.setApple();
+                let appleCell = this.getCell(newCoords);
+                let newAppleCell = this.getCell(this.apple);
+                this.clearCell(appleCell, 'apple');
+                this.printCell(newAppleCell, 'apple');
+                this.stop();
+                this.go();
+                return;
+            }
             // стереть последнюю ячейку хвоста
+            let lastCell = this.getCell(this.body[0]);
+            this.clearCell(lastCell);
             // удалить первый элемент массива body (последняя клетка хвоста)
+            this.body.shift();
+            console.log(this.isPlaying);
         }, 1000 / this.speed);
     }
     /**
@@ -162,20 +256,36 @@ class Game {
         // чтобы сохранить this и при этом не вызывать сразу обработчик
         window.addEventListener('keydown', this.keydownHandler.bind(this));
     }
+    clickHandler() {
+        this.goStop();
+    }
+    setListenerBtns() {
+        // сделать слушатель для перезагрузки
+        document.getElementById(this.field.startGoStopId).addEventListener('click', this.clickHandler.bind(this));
+    }
     /**
      * устанавливает слушатели событий
      */
     setListener() {
-        // this.setListenerBtns();
+        this.setListenerBtns();
         this.setListenerKeys();
     }
     getNewItem() { }
     /**
-     * добавляет класс змейки для ячейки
+     * добавляет класс для ячейки
      * @param {*} cell элемент ячейки
+     * @param {String} className имя класса (по умолчанию snake)
      */
-    printCell(cell) {
-        cell.classList.add('snake');
+    printCell(cell, className = 'snake') {
+        cell.classList.add(className);
+    }
+    /**
+     * удаляет класс ячейки
+     * @param {*} cell элемент ячейки
+     * @param {String} className имя класса (по умолчанию snake)
+     */
+    clearCell(cell, className = 'snake') {
+        cell.classList.remove(className);
     }
     /**
      * получает ячейк таблицы
