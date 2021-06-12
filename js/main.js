@@ -8,11 +8,11 @@ window.addEventListener('keydown', e => console.dir(e.code));
 let settings = {
     snakeLen: 3,
     snakeSpeed: 1,
-    cellSize: "_extralarge",
+    cellSize: "_large",
     slowLoading: true,
     fieldSize: {
-        rows: 20,
-        cols: 20
+        rows: 25,
+        cols: 25
     }
 };
 const fieldGenBtn = document.querySelector('#field_gen_btn');

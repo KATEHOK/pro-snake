@@ -49,6 +49,19 @@ class Game {
         this.score = 0;
     }
     /**
+     * проверяет, входит ли ячейка в массив тела змейки
+     * @param {Array} coords координаты проверяемой ячейки
+     * @returns 
+     */
+    bodyIncludes(coords) {
+        for (let i = 0; i < this.body.length; i++) {
+            if (JSON.stringify(this.body[i]) == JSON.stringify(coords)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
      * устанавливает случайную позицию для яблока
      */
     setApple() {
@@ -58,7 +71,7 @@ class Game {
             coords = [];
             coords.push(Math.round(Math.random() * (this.field.fieldSize.cols - 1)));
             coords.push(Math.round(Math.random() * (this.field.fieldSize.rows - 1)));
-            if (!this.body.includes(coords) && JSON.stringify(this.apple) != JSON.stringify(coords)) {
+            if (!this.bodyIncludes(coords) && JSON.stringify(this.apple) != JSON.stringify(coords)) {
                 checker = false;
             }
         }
@@ -94,7 +107,7 @@ class Game {
      */
     isCellCorrect(item) {
         return item[0] >= 0 && item[1] >= 0 && item[0] < this.field.fieldSize.cols &&
-            item[1] < this.field.fieldSize.rows && !this.body.includes(item);
+            item[1] < this.field.fieldSize.rows && !this.bodyIncludes(item);
     }
     /**
      * обновляет счётчик на странице
@@ -130,7 +143,8 @@ class Game {
             // чтобы сравнить массивы можно преобразовать их в JSON строки
             if (JSON.stringify(this.apple) == JSON.stringify(newCoords)) {
                 this.score++;
-                this.speed++;
+                this.speed *= 0.9;
+                console.log(this.speed);
                 this.updateScore();
                 this.setApple();
                 let appleCell = this.getCell(newCoords);
@@ -147,7 +161,7 @@ class Game {
             // удалить первый элемент массива body (последняя клетка хвоста)
             this.body.shift();
             console.log(this.isPlaying);
-        }, 1000 / this.speed);
+        }, 500 * this.speed);
     }
     /**
      * удаляет сет-интервал игры
